@@ -1,0 +1,48 @@
+/*.progress{
+    width: 107.4%;
+    height: 2mm;
+    margin-left: -4%;
+}
+.progress-bar{
+    height: 100%;
+}*/
+.q{
+    color: rgb(0, 166, 255);
+    margin-left: 40%;
+}
+.title{  
+    font-size: 16pt;
+    margin-bottom: 3%;
+    margin-left: 15%;
+    margin-top: 2%;
+    font-family:avec serif;
+}
+.question{
+    width: 70%;
+    height: 60%;
+    margin-left: 14%;
+    margin-top: 25px;
+    font-size: 13pt;
+}
+div img#img{
+    float: right;
+    border: 2px rgb(255, 255, 255);
+    background-color: #ffffff;
+  }
+#img{
+    width:200px;
+    height:250px;
+    margin-left: 18px;
+    margin-top: -91px;
+}
+.list{
+    width: 70%;
+    margin-left: 8%;
+}
+mat-paginator{
+    margin-top: 4%;
+}
+.sizeTime{
+    font-size: 17px;
+    margin-left: -1%;
+}

@@ -1,0 +1,126 @@
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h1 style="margin-top:3%;margin-left:14%; font-family: cursive;">
+       Create New Question 
+    </h1>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+  <table>
+    <thead>
+      <tr>
+        <td>
+          <button [disabled]="mode =='edit'" style="margin-left: -9%;" class="inputImage" mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+            <img [src]="imagePreview" [alt]="form.value.title">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" style="margin-left: -9%;width: 77%;">
+            <mat-label>Types</mat-label>
+            <mat-select  [disabled]="mode =='edit'" [(value)]="selected" >
+              <mat-option *ngFor="let type of types" [value]="type.value">
+                {{ type.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field >
+            <input class="title" maxlength="137" matInput type="text" formControlName="title" placeholder="Question Title">
+            <mat-error *ngIf="form.get('title').invalid">Please enter question title.</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field >
+            <input matInput type="text" maxlength="137" formControlName="feedback" placeholder="Feedback">
+            <mat-error *ngIf="form.get('feedback').invalid">Please enter question feedback.</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" style="margin-left: -9%;width: 77%;">
+            <mat-label>Quizzes</mat-label>
+            <mat-select [(value)]="selectedQuiz" >
+              <mat-option *ngFor="let quiz of quizzes" [value]="quiz.name">
+                {{ quiz.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+     <tr>
+       <td colspan="1">
+        <div formArrayName="answer">
+          <div class="form-row" *ngFor= "let answer of form.get('answer')['controls']; let i= index">
+            <div [formGroupName]="i">
+                <div id="allOption" class="form-group col-md-8" >
+                  <textarea *ngIf="selected === 'Multiple' || selected === 'Ordering' "
+                      class="form-control"
+                      rows="2" maxlength="137" 
+                      formControlName="option"
+                      [(ngValue)]="answer.option"
+                      placeholder="Option {{i+1}}"
+                      >
+                  </textarea>
+                  <textarea *ngIf="selected === 'Match'"
+                      class="form-control"
+                      rows="2" maxlength="137" 
+                      style="
+                      width: 50%;
+                      margin-left: -104px;"
+                      formControlName="option" 
+                      [(ngValue)]="answer.option"
+                      placeholder="Proposition {{i+1}}"
+                      >
+                  </textarea>
+                </div>  
+                <div class="form-group col-md-2">
+                    <input *ngIf="selected === 'Multiple'"
+                      type="text" maxlength="137" 
+                      style="margin-left:-190%;"
+                      class="form-control"
+                      formControlName="response" 
+                      [(ngValue)]="answer.response"
+                      placeholder="True/False"
+                    />
+                    <input *ngIf="selected === 'Ordering'"
+                    type="text" maxlength="137" 
+                    style="margin-left:-190%;"
+                    class="form-control"
+                    formControlName="response" 
+                    [(ngValue)]="answer.response"
+                    placeholder="Order Ex:{{i+1}}"
+                  />
+                  <textarea *ngIf="selected === 'Match'"
+                      class="form-control"
+                      rows="2" maxlength="137" 
+                      style="width: 246%;
+                      margin-left: -324%;"
+                      formControlName="response" 
+                      [(ngValue)]="answer.response"
+                      placeholder="Match {{i+1}}"
+                      >
+                  </textarea>
+                </div>
+                <div class="form-group col-md-2">
+                  <button style="background-color: crimson;margin-left:-180%;" class="glyphicon glyphicon-trash" mat-raised-button color="warn" (click)="onRemoveAnswer(i)"></button>
+                </div>
+            </div>
+          </div>
+          <button type="button" mat-raised-button class="btnSuccess" (click)="addAnswer(null,null)">Add answer</button>
+          <button class="btn" mat-raised-button color="primary" type="submit">Save Question</button>
+        </div>
+      </td>
+     </tr>
+    </tbody>
+  </table>
+</form>

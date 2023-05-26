@@ -1,0 +1,33 @@
+<mat-toolbar style="height:7%; Background-color:rgb(103,111,183);" class="mat-elevation-z4">
+  <ul>
+    <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="quiz" routerLinkActive="">QUIZ</a>
+    </li>
+    <li *ngIf="userIsAuthenticated && this.role =='admin'">
+      <a mat-button routerLink="list" >LIST</a>
+    </li>
+    <li *ngIf="userIsAuthenticated && this.role =='admin'">
+      <a mat-button routerLink="create" routerLinkActive="">NEW QUESTION</a>
+    </li>
+  </ul>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/login" routerLinkActive="">LOGIN</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signup" routerLinkActive="">SIGNUP</a>
+    </li>
+
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/loginAdherent" routerLinkActive="">LOGIN Adherent</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signupAdherent" routerLinkActive="">SIGNUP Adherent</a>
+    </li>
+
+    <li *ngIf="userIsAuthenticated">
+      <button style="color:white;" mat-button (click)="onLogout()">LOGOUT</button>
+    </li>
+  </ul>
+</mat-toolbar>

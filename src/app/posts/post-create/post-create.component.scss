@@ -1,0 +1,56 @@
+textarea {
+  width: 80%;
+  margin-left: -104px;
+}
+mat-form-field
+{
+  width: 77%;
+  margin-left: -9%;
+}
+mat-form-field .title{
+  width: 175%;
+}
+
+form{
+  width: 80%;
+  margin-top: 4%;
+  margin-left: 15%;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 6rem;
+  margin: 1rem 0;
+  margin-left: 5%;
+  margin-top: -7%;
+}
+
+.image-preview img {
+  height: 100%;
+}
+.btn{
+  margin-top: 2%;
+  margin-bottom: 5%;
+  background-color:rgb(153, 132, 10);
+}
+.btnSuccess{
+  background-color: rgb(252, 217, 165);
+  color: black;
+  margin-right: 1%;
+  margin-left: 25%;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+th{
+  text-align: center;
+  width:100%;
+}

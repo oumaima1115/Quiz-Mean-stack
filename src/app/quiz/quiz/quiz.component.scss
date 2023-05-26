@@ -1,0 +1,34 @@
+.form-group{
+    margin-left: 22%;
+}
+.form-control{
+    margin-top: -12%;
+    margin-left: 1%;
+}
+input[type="file"] {
+    visibility: hidden;
+  }
+  
+  .image-preview {
+    height: 6rem;
+    margin: 1rem 0;
+    margin-left: 31%;
+    margin-top: -40%;
+  }
+  
+  .image-preview img {
+    height: 100%;
+  }
+div.cadre1{
+    float: left;
+    border: 1px solid white;
+    height: 331px;
+    width: 20%;
+    margin-top: -5px;
+    margin-bottom: 84px;
+    margin-left: 4%;
+}
+#img{
+  width: 238px;
+  height: 190px;
+}

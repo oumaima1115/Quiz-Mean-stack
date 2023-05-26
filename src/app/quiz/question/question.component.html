@@ -1,0 +1,90 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<p class="sizeTime" style="position: fixed;margin-top: -8%;"> 
+    {{ secondes }} sec
+</p>
+<mat-accordion multi="true" *ngIf="Holyposts.length > 0 && !isLoading">
+    <div  data-aos="fade-up" data-aos-duration="700" *ngFor="let post of Holyposts;let i=index" style="margin-top: 11%; margin-bottom: 11rem;">
+      <!--type multiple-->
+        <div *ngIf="post.type =='Multiple'">
+        <div>
+            <i class="q">Question {{ i+1 }}</i> of {{Holyposts.length}} <br>
+        </div>
+        <p class="title" > {{answer[i].title}} </p>
+        <div class="post-image">
+            <img id="img" [src]="post.imagePath" [alt]="post.title">
+        </div>
+            
+        <div class="list" *ngFor="let answer of answer[i].option;let j=index">
+            <li class="list-group-item"> 
+                <input type="checkbox" [(ngModel)]="answer.isselected" (change)="onChange()"/>
+                {{ answer.choice }}
+            </li>
+        </div>
+        <p style="font-size: 16pt;font-family:monospace;font-size: medium;margin-left: 9%; margin-top: 1%;">
+            The number of correct choices is {{post.correctChoices}}.
+        </p>
+      </div> 
+      <!--type ordering-->
+        <div *ngIf="post.type =='Ordering'" [ordering]="getAnswers(post.answer)">
+            <div>
+                <i class="q">Question {{ i+1 }}</i> of {{Holyposts.length}} <br>
+            </div>
+            <p class="title" > {{answer[i].title}} </p>
+            <div class="post-image">
+                <img id="img" [src]="post.imagePath" [alt]="post.title">
+            </div>
+            <div class="list" *ngFor="let option of answer[i].option;let k=index">
+                <li class="list-group-item">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Order number</mat-label>
+                        <mat-select [ngModel]="selectedDevice" (ngModelChange)="onChange3($event,i,k)" name="sel2">
+                          <mat-option *ngFor="let req of ordering" [value]="req">
+                             {{req}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                     {{ option.choice }}
+                </li>
+            </div>
+    
+          </div>
+      <!--type match-->
+      <div *ngIf="post.type =='Match'" [matching]="getAnswer(post.answer)">
+        <div>
+            <i class="q">Question {{ i+1 }}</i> of {{Holyposts.length}} <br>
+        </div>
+        <p class="title" > {{answer[i].title}} </p>
+        <div class="post-image">
+            <img id="img" [src]="post.imagePath" [alt]="post.title">
+        </div>
+        <div class="list" *ngFor="let option of answer[i].option;let j=index">
+            <li class="list-group-item">
+                <mat-form-field appearance="fill">
+                    <mat-label>Matching with...</mat-label>
+                    <mat-select [ngModel]="selectedDevice" (ngModelChange)="onChange2($event,i,j)" name="sel2">
+                      <mat-option *ngFor="let req of matching" [value]="req">
+                         {{req}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                {{ option.choice }}
+            </li>
+        </div>
+
+      </div> 
+    </div>
+</mat-accordion>
+<!--<mat-paginator style="margin-top: 8%;" [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event,post)"
+        *ngIf="allPosts.length > 0">
+    </mat-paginator>-->
+
+
+<button mat-raised-button 
+    (click)="getResult()" 
+    style="background-color: #b3d4fc;
+        margin-left: 35%;
+        margin-bottom: 6%;" 
+    type="button"
+    >
+    Get Result
+</button>

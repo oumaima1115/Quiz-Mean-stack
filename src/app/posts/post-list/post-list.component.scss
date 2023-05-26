@@ -1,0 +1,48 @@
+.example-card{
+  height: 32em;
+  width: 79em;
+  margin-top: 1em;
+  margin-left: 4em;
+}
+.card-text{
+  margin-left: 15%;
+
+}
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+#index{
+  width: 25%;
+}
+
+.info-text {
+  text-align: center;
+}
+div.post-image{
+  float: right;
+  border: 0px solid #bcbcbc;
+  height: 276px; 
+  margin-left: 79%; 
+  margin-right: 3%; 
+  margin-top: -16%;
+}
+#img{
+  width: 92%;
+    height: 253px;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+mat-expansion-panel-body{
+  height:200%;
+}

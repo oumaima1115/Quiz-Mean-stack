@@ -1,0 +1,30 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header>
+      <i style="font-size: 100%;">{{ post.title }}</i>
+    </mat-expansion-panel-header>
+    <p><b style="font-weight: bold;font-family:normal;">Type:</b> {{ post.type }}</p>
+    <p><b style="font-weight: bold;font-family:normal;">Feedback:</b> {{ post.feedback }}</p>
+    <p><b style="font-weight: bold;font-family:normal;">Quiz:</b> {{ post.quiz }}</p>
+    <p style="font-weight: bold;font-family:normal;" *ngIf="post.type != 'True/False'">All Options:</p>
+    <div *ngFor="let option of post.answer; let i = index">
+      <p>{{i+1}}: {{option.option}} : {{option.response}}</p>
+    </div>
+    <div *ngIf="post.type === 'True/False'">
+      <p>Response is: {{post.answer}}</p>
+    </div>
+    <div class="post-image">
+      <img id="img" [src]="post.imagePath" [alt]="post.title">
+    </div>
+    <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator">
+      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No questions added yet!</p>
+
+<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="posts.length > 0">
+</mat-paginator>

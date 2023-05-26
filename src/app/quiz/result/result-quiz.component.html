@@ -1,0 +1,86 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="res" *ngIf="!isLoading">
+    <!--Success-->
+    <div *ngIf="getCorrectAnswer() >= obj.answer.length/2">
+         <h2>Thank you for compliting this quiz.</h2>
+        <img style="width: 15cm; margin-left: -13%;" src="https://dzf8vqv24eqhg.cloudfront.net/userfiles/2086/3918/ckfinder/images/3(24).jpg" alt="certificate" >
+        <br>
+        <mat-card-actions class="btnDownload">
+            <button mat-raised-button (click)="onDownload()" color="primary" >Download</button>
+        </mat-card-actions>
+    </div>
+    <!--Failed-->
+    <div *ngIf="getCorrectAnswer() < obj.answer.length/2">
+        <h2>Sorry, you fail the quiz test.</h2>
+        <button mat-raised-button (click)="onStart()" color="accent" >Try again</button><br>
+    </div>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <td>{{user.name}}</td>
+        </tr>
+        <tr>
+            <th>Score</th>
+            <td> {{getCorrectAnswer() }} / {{obj.answer.length}} Points ( {{getCorrectAnswer() *10 }}% )</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{user.email}}</td>
+        </tr>
+        <tr>
+            <th>Correct Answers</th>
+            <td> {{getCorrectAnswer()}} </td>
+        </tr>
+        <tr>
+            <th>Incorrect Answers</th>
+            <td> {{getInCorrectAnswer()}} </td>
+        </tr>
+        <tr>
+            <th>UnAsnwered</th>
+            <td> {{ getUnAnswered() }} </td>
+        </tr>
+        <tr>
+            <th>Passing grade</th>
+            <td> {{getCorrectAnswer()*10}}%</td>
+        </tr>
+        <tr>
+            <th>Time Taken</th>
+            <td> {{obj.timeTaken}} </td>
+        </tr>
+        <tr>
+            <th>Number of trial</th>
+            <td> {{obj.nbrEssay}} </td>
+        </tr>
+    </table><br><br>
+
+    <h2 style="font-size: 16pt;font-family:avec serif;font-size: medium;">
+        <hr style="margin-left: -43%; border-top: 1px solid #888eae;">
+        <div *ngFor="let answer of obj.answer;let j=index" style="margin-left: -27%;">
+            <h2>{{ getStatus(answer.option,answer.title,j+1) }}</h2>
+            {{j+1}}) {{ answer.title}}<br>
+            <div *ngFor="let option of answer.option;let j=index">
+                <h2 [ngStyle]="{color: getColor(option.response,option.isselected)}" style="font-size: 16pt;font-family:monospace;font-size: medium;">
+                    {{j+1}}. {{ option.choice}} --  {{ option.isselected}}<br>
+                </h2>
+            </div>
+            <h4>Feedback: {{answer.feedback}}</h4>
+            <hr style="margin-left: -13%; border-top: 1px solid #888eae;">
+        </div>
+    </h2>
+    
+    
+    <app-quizEssay *ngIf="trial" 
+        [nbrEssay]="this.obj.nbrEssay"
+        [score]="getCorrectAnswer()"
+        [totalPosts]="obj.answer.length"
+        [correctAnswer]="getCorrectAnswer()"
+        [incorrectAnswer]="getInCorrectAnswer()"
+        [unAnswered]="getUnAnswered()"
+        [passingGrade]="getCorrectAnswer()*10+'%'"
+        [timeTaken]="obj.timeTaken"
+        [IDResponse]="obj.id"
+        [userId]="obj.userId"
+        [quizId]="obj.quizId"
+    >here</app-quizEssay>
+</div>
